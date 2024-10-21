@@ -1,0 +1,14 @@
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumbs a {
+  color: #333;
+  text-decoration: none;
+}
+
+.breadcrumbs .separator {
+  margin: 0 10px;
+  color: #666;
+}
