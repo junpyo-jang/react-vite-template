@@ -1,6 +1,6 @@
 import { ReactElement } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { FaCloud, FaUserFriends, FaMicrochip, FaTasks, FaCog, FaChevronLeft } from 'react-icons/fa'
+import { FaHome, FaCloud, FaUserFriends, FaMicrochip, FaTasks, FaCog, FaChevronLeft } from 'react-icons/fa'
 import './index.css'
 
 interface SidebarProps {
@@ -22,7 +22,13 @@ const Sidebar = ({ isExpanded, toggleSidebar }: SidebarProps): ReactElement => {
       <nav>
         <ul>
           <li>
-            <Link to="/" className={location.pathname === '/' ? 'active' : ''}>
+            <Link to="/dashboard" className={location.pathname === '/dashboard' ? 'active' : ''}>
+              <FaHome />
+              {isExpanded ? <span>Dashboard</span> : <span className="tooltip">Dashboard</span>}
+            </Link>
+          </li>
+          <li>
+            <Link to="/accounts" className={location.pathname === '/accounts' ? 'active' : ''}>
               <FaUserFriends />
               {isExpanded ? <span>Accounts</span> : <span className="tooltip">Accounts</span>}
             </Link>

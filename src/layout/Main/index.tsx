@@ -1,7 +1,7 @@
 import { ReactElement, ReactNode, useState } from 'react'
-import Header from './Header'
-import Sidebar from './Sidebar'
-import Content from './Content'
+import Header from '@layout/Main/Header'
+import Sidebar from '@layout/Main/Sidebar'
+import Content from '@layout/Main/Content'
 import './index.css'
 
 interface MainProps {

@@ -4,7 +4,7 @@ import './index.css'
 const Settings = (): ReactElement => {
   return (
     <div className="settings">
-      <h2>Settings</h2>
+      <h1>설정</h1>
       {/* 설정 관련 내용을 여기에 추가 */}
     </div>
   )

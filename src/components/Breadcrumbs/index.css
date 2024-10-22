@@ -1,14 +1,25 @@
-.breadcrumbs {
+.breadcrumb-container {
   display: flex;
   align-items: center;
 }
 
-.breadcrumbs a {
+.breadcrumb-icon {
+  font-size: 18px;
+  color: #666;
+  margin-right: 10px;
+}
+
+.breadcrumbs-items {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumbs-items a {
   color: #333;
   text-decoration: none;
 }
 
-.breadcrumbs .separator {
+.breadcrumbs-items .separator {
   margin: 0 10px;
   color: #666;
 }

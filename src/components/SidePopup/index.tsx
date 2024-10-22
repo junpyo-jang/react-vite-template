@@ -2,14 +2,14 @@ import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 import './index.css';
 
-interface NotificationSidebarProps {
+interface SidePopupProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
   width?: string;
 }
 
-const NotificationSidebar: React.FC<NotificationSidebarProps> = ({ isOpen, onClose, children, width = '400px' }) => {
+const SidePopup: React.FC<SidePopupProps> = ({ isOpen, onClose, children, width = '400px' }) => {
   return (
     <>
       {isOpen && <div className="sidebar-overlay" onClick={onClose}></div>}
@@ -29,4 +29,4 @@ const NotificationSidebar: React.FC<NotificationSidebarProps> = ({ isOpen, onClo
   );
 };
 
-export default NotificationSidebar;
+export default SidePopup;

@@ -1,5 +1,5 @@
 import React from 'react'
-import Content from '../../layouts/Main/Content'
+import Content from '@layout/Main/Content'
 import './index.css'
 
 const Accounts: React.FC = () => {
@@ -7,7 +7,7 @@ const Accounts: React.FC = () => {
     return (
       <Content>
         <div className="accounts">
-          <h2>Accounts</h2>
+          <h1>계정</h1>
           {/* Accounts 페이지 내용 */}
         </div>  
       </Content>

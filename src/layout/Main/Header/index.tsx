@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import Breadcrumbs from '../../../components/Breadcrumbs';
-import { FaBell, FaCaretDown, FaHome, FaSignOutAlt, FaUserCircle, FaUserEdit } from 'react-icons/fa';
-import NotificationSidebar from '../../../components/NotificationSidebar';
-import NotificationContent from '../../../components/NotificationContent';
+import { FaBell, FaCaretDown, FaSignOutAlt, FaUserCircle, FaUserEdit, FaCheckCircle, FaInfoCircle } from 'react-icons/fa';
+import SidePopup from '@components/SidePopup';
+import NotificationContent from '@popup/Notification';
 import './index.css';
 
 interface HeaderProps {
@@ -13,17 +13,19 @@ const Header: React.FC<HeaderProps> = ({ breadcrumbItems }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
 
-  const notificationCount = 10; // 테스트를 위해 100으로 설정
+  const notificationCount = 100; // 테스트를 위해 100으로 설정
+  const notifications = [
+    { id: 1, message: "새 기기가 연결되었습니다", time: "2분 전", icon: <FaBell /> },
+    { id: 2, message: "작업이 성공적으로 완료되었습니다", time: "1시간 전", icon: <FaCheckCircle /> },
+    { id: 3, message: "시스템 업데이트가 가능합니다", time: "2시간 전", icon: <FaInfoCircle /> },
+  ];
 
   return (
     <header className="main-header">
-      <div className="breadcrumb-container">
-        <FaHome className="breadcrumb-icon" />
-        <Breadcrumbs items={breadcrumbItems} />
-      </div>
+      <Breadcrumbs items={breadcrumbItems} />
       <div className="user-info">
-        <div className="notification-badge" onClick={() => setIsNotificationOpen(true)}>
-          <FaBell className="notification-icon" />
+        <div className={`noti-badge`} onClick={() => setIsNotificationOpen(true)}>
+          <FaBell className="noti-icon" />
           <span className={`badge ${notificationCount > 99 ? 'badge-long' : ''}`}>
             {notificationCount > 99 ? '99+' : notificationCount}
           </span>
@@ -32,7 +34,7 @@ const Header: React.FC<HeaderProps> = ({ breadcrumbItems }) => {
           <FaUserCircle className="user-avatar" />
           <div className="user-details">
             <span className="user-name">장준표</span>
-            <span className="user-email">jjp@example.com</span>
+            <span className="user-email">jpjang@yookgak.com</span>
           </div>
           <FaCaretDown className="dropdown-icon" />
           {isDropdownOpen && (
@@ -49,13 +51,13 @@ const Header: React.FC<HeaderProps> = ({ breadcrumbItems }) => {
           )}
         </div>
       </div>
-      <NotificationSidebar 
+      <SidePopup 
         isOpen={isNotificationOpen} 
         onClose={() => setIsNotificationOpen(false)}
-        width="800px"
+        width="500px"
       >
-        <NotificationContent />
-      </NotificationSidebar>
+        <NotificationContent notifications={notifications} />
+      </SidePopup>
     </header>
   );
 };
