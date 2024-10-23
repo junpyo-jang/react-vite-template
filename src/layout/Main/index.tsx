@@ -5,11 +5,10 @@ import Content from '@layout/Main/Content'
 import './index.css'
 
 interface MainProps {
-  breadcrumbItems: { label: string; path: string }[];
   children: ReactNode;
 }
 
-const Main = ({ breadcrumbItems, children }: MainProps): ReactElement => {
+const Main = ({ children }: MainProps): ReactElement => {
   const [isExpanded, setIsExpanded] = useState(true);
 
   const toggleSidebar = () => {
@@ -20,7 +19,7 @@ const Main = ({ breadcrumbItems, children }: MainProps): ReactElement => {
     <div className="app">
       <Sidebar isExpanded={isExpanded} toggleSidebar={toggleSidebar} />
       <div className="main-content">
-        <Header breadcrumbItems={breadcrumbItems} />
+        <Header/>
         <Content>
           {children}
         </Content>

@@ -1,6 +1,8 @@
 import { ReactElement } from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { FaHome, FaCloud, FaUserFriends, FaMicrochip, FaTasks, FaCog, FaChevronLeft } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+import { FaUserFriends, FaMicrochip, FaTasks, FaCog, FaChevronLeft, FaChartBar, FaNetworkWired } from 'react-icons/fa'
+import { useAtom } from 'jotai'
+import { selectedTabAtom } from '@atoms/ui'
 import './index.css'
 
 interface SidebarProps {
@@ -9,48 +11,42 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ isExpanded, toggleSidebar }: SidebarProps): ReactElement => {
-  const location = useLocation();
+  const [selectedTab, setSelectedTab] = useAtom(selectedTabAtom);
+
+  const menuItems = [
+    { path: '/dashboard', icon: FaChartBar, label: 'Dashboard' },
+    { path: '/accounts', icon: FaUserFriends, label: 'Accounts' },
+    { path: '/devices', icon: FaMicrochip, label: 'Devices' },
+    { path: '/tasks', icon: FaTasks, label: 'Tasks' },
+    { path: '/settings', icon: FaCog, label: 'Settings' },
+  ];
+
+  const handleTabClick = (path: string) => {
+    setSelectedTab(path.slice(1)); // '/dashboard' -> 'dashboard'
+  };
 
   return (
     <aside className={`sidebar ${isExpanded ? 'expanded' : 'collapsed'}`}>
       <div className="sidebar-header">
-        <h1><FaCloud /> {isExpanded && 'IOT CORE'}</h1>
+        <h1><FaNetworkWired /> {isExpanded && 'IOT CORE'}</h1>
         <button onClick={toggleSidebar} className="toggle-btn">
           <FaChevronLeft className={isExpanded ? '' : 'rotated'} />
         </button>
       </div>
       <nav>
         <ul>
-          <li>
-            <Link to="/dashboard" className={location.pathname === '/dashboard' ? 'active' : ''}>
-              <FaHome />
-              {isExpanded ? <span>Dashboard</span> : <span className="tooltip">Dashboard</span>}
-            </Link>
-          </li>
-          <li>
-            <Link to="/accounts" className={location.pathname === '/accounts' ? 'active' : ''}>
-              <FaUserFriends />
-              {isExpanded ? <span>Accounts</span> : <span className="tooltip">Accounts</span>}
-            </Link>
-          </li>
-          <li>
-            <Link to="/devices" className={location.pathname === '/devices' ? 'active' : ''}>
-              <FaMicrochip />
-              {isExpanded ? <span>Devices</span> : <span className="tooltip">Devices</span>}
-            </Link>
-          </li>
-          <li>
-            <Link to="/tasks" className={location.pathname === '/tasks' ? 'active' : ''}>
-              <FaTasks />
-              {isExpanded ? <span>Tasks</span> : <span className="tooltip">Tasks</span>}
-            </Link>
-          </li>
-          <li>
-            <Link to="/settings" className={location.pathname === '/settings' ? 'active' : ''}>
-              <FaCog />
-              {isExpanded ? <span>Settings</span> : <span className="tooltip">Settings</span>}
-            </Link>
-          </li>
+          {menuItems.map((item) => (
+            <li key={item.path}>
+              <Link 
+                to={item.path} 
+                className={selectedTab === item.path.slice(1) ? 'active' : ''}
+                onClick={() => handleTabClick(item.path)}
+              >
+                <item.icon />
+                {isExpanded ? <span>{item.label}</span> : <span className="tooltip">{item.label}</span>}
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
       {isExpanded && (

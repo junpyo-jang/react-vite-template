@@ -1,21 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaUsers } from 'react-icons/fa';
+import { FaUsers, FaMicrochip, FaTasks, FaChartBar, FaCog, FaHome } from 'react-icons/fa';
+import { useAtomValue } from 'jotai';
+import { breadcrumbItemsAtom } from '@atoms/ui';
 import './index.css';
 
-interface BreadcrumbsProps {
-  items: { label: string; path: string }[];
-}
+const Breadcrumbs: React.FC = () => {
+  const items = useAtomValue(breadcrumbItemsAtom);
 
-const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items }) => {
+  const getIcon = (label: string) => {
+    switch(label) {
+      case 'Home':
+        return <FaHome />;
+      case 'Dashboard':
+        return <FaChartBar />;
+      case 'Accounts':
+        return <FaUsers />;
+      case 'Devices':
+        return <FaMicrochip />;
+      case 'Tasks':
+        return <FaTasks />;
+      default:
+        return <FaCog />;
+    }
+  };
+
   return (
     <div className="breadcrumb-container">
-      <FaUsers className="breadcrumb-icon" />
       <nav className="breadcrumbs-items">
         {items.map((item, index) => (
           <React.Fragment key={item.path}>
             {index > 0 && <span className="separator">&gt;</span>}
-            <Link to={item.path}>{item.label}</Link>
+            <Link to={item.path} className="breadcrumb-link">
+              {index === 0 && <span className="breadcrumb-icon">{getIcon(item.label)}</span>}
+              <span>{item.label}</span>
+            </Link>
           </React.Fragment>
         ))}
       </nav>

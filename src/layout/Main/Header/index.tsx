@@ -5,11 +5,7 @@ import SidePopup from '@components/SidePopup';
 import NotificationContent from '@popup/Notification';
 import './index.css';
 
-interface HeaderProps {
-  breadcrumbItems: { label: string; path: string }[];
-}
-
-const Header: React.FC<HeaderProps> = ({ breadcrumbItems }) => {
+const Header: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
 
@@ -22,7 +18,7 @@ const Header: React.FC<HeaderProps> = ({ breadcrumbItems }) => {
 
   return (
     <header className="main-header">
-      <Breadcrumbs items={breadcrumbItems} />
+      <Breadcrumbs />
       <div className="user-info">
         <div className={`noti-badge`} onClick={() => setIsNotificationOpen(true)}>
           <FaBell className="noti-icon" />
